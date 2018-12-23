@@ -1,1 +1,12 @@
-body{margin:0;padding:0;color:#00f}body h1{font-size:60px;text-align:center;text-transform:none}
+section {
+  padding-top: 50px; }
+  section h1 {
+    margin-bottom: 30px;
+    font-size: 60px;
+    text-align: center;
+    color: blue; }
+  section .input-group-text {
+    background-color: #bcc8d1; }
+  section .icon-search img {
+    width: 20px;
+    height: 20px; }

@@ -1,7 +1,9 @@
 'use strict';
 
 window.addEventListener('load', function (ev) {
-    videoAjaxRequest('/search/movie', '&query=Harry Potter&language=ru-RU');
+    let searchInput = document.getElementById("search-input");
+
+    searchInput.addEventListener('change', searchInputHandler);
 });
 
 let videoAjaxRequest = (endPoint, queryString) => {
@@ -31,7 +33,10 @@ let videoAjaxRequest = (endPoint, queryString) => {
     }
 };
 
-(() => {
-    // test
-    // alert("Hi Hi Hi Hi!");
-})();
+let searchInputHandler = (event) => {
+    debugger;
+    let queryString = '&query=' + event.target.value + '&language=ru-RU';
+
+    // videoAjaxRequest('/search/movie', '&query=Harry Potter&language=ru-RU');
+    videoAjaxRequest('/search/movie', queryString);
+};

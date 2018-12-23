@@ -44,7 +44,7 @@ gulp.task('sass', function () {
     return gulp.src(path.src.scss)
         .pipe(plumber()) // error Handler
         .pipe(sass())
-        .pipe(cleanCSS())
+        // .pipe(cleanCSS())
         .pipe(gulp.dest(path.dist.css))
 });
 
@@ -67,7 +67,7 @@ gulp.task('js', function() {
     return gulp.src(path.src.js)
         .pipe(plumber()) // error Handler
         .pipe(babel())
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(gulp.dest(path.dist.js))
 });
 
