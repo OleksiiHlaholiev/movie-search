@@ -1,5 +1,5 @@
 @import "mixins";
-
+@import "general-styles";
 
 section {
     padding: 30px 0;
@@ -58,7 +58,8 @@ section {
 
             .img-cont {
                 width: 185px;
-                @include mediaMaxWidth(1000px) {
+                min-height: 20vh;
+                @include mediaMaxWidth($mobileWidth) {
                     width: 100%;
                     text-align: center;
                 }
@@ -66,7 +67,7 @@ section {
                     display: inline-block;
                     width: 100%;
                     .poster {
-
+                        max-width: 100%;
                     }
                 }
             }
@@ -75,7 +76,7 @@ section {
                 padding: 15px;
                 position: relative;
 
-                @include mediaMaxWidth(1000px) {
+                @include mediaMaxWidth($mobileWidth) {
                     width: 100%;
                 }
                 p {
@@ -102,6 +103,9 @@ section {
                     margin: 0;
                     border-top: 1px solid #e3e3e3;
 
+                    @include mediaMaxWidth($mobileWidth) {
+                        position: relative;
+                    }
 
                     .link {
 
