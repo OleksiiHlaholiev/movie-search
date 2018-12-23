@@ -1,9 +1,11 @@
 'use strict';
 
 window.addEventListener('load', function (ev) {
-    let searchInput = document.getElementById("search-input");
+    let searchInput = document.getElementById("search-input"),
+        searchBtn = document.getElementById("search-btn");
 
     searchInput.addEventListener('change', searchInputHandler);
+    searchBtn.addEventListener('click', searchBtnHandler);
 });
 
 let videoAjaxRequest = (endPoint, queryString) => {
@@ -34,9 +36,17 @@ let videoAjaxRequest = (endPoint, queryString) => {
 };
 
 let searchInputHandler = (event) => {
-    debugger;
+    // debugger;
     let queryString = '&query=' + event.target.value + '&language=ru-RU';
 
     // videoAjaxRequest('/search/movie', '&query=Harry Potter&language=ru-RU');
     videoAjaxRequest('/search/movie', queryString);
+};
+
+let searchBtnHandler = (event) => {
+    event.preventDefault();
+    // debugger;
+    // let queryString = '&query=' + event.target.value + '&language=ru-RU';
+    //
+    // videoAjaxRequest('/search/movie', queryString);
 };

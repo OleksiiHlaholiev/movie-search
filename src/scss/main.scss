@@ -1,21 +1,108 @@
+@import "mixins";
+
 
 section {
     padding-top: 50px;
     h1 {
         margin-bottom: 30px;
-        font-size: 60px;
+        font-size: 48px;
         text-align: center;
         color: blue;
     }
+}
 
+.form-cont {
     .input-group-text {
         background-color: #bcc8d1;
+    }
+
+    .btn-outline-secondary:hover {
+        color: #fff;
+        background-color: #bcc8d1;
+        border-color: #6c757d;
+    }
+
+    .btn-outline-secondary:focus, .btn-outline-secondary.focus {
+        box-shadow: none;
     }
 
     .icon-search {
         img {
             width: 20px;
             height: 20px;
+        }
+    }
+}
+
+.search-results {
+    margin-top: 50px;
+
+    h2 {
+
+    }
+
+    .results-cont {
+        margin-top: 30px;
+        .item {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+
+            border: 1px solid #e3e3e3;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+            .img-cont {
+                width: 185px;
+                @include mediaMaxWidth(1000px) {
+                    width: 100%;
+                    text-align: center;
+                }
+                a {
+                    display: inline-block;
+                    width: 100%;
+                    .poster {
+
+                    }
+                }
+            }
+            .info-cont {
+                width: calc(100% - 185px);
+                padding: 15px;
+                position: relative;
+
+                @include mediaMaxWidth(1000px) {
+                    width: 100%;
+                }
+                p {
+                    margin-bottom: 5px;
+                }
+                .name {
+
+                }
+                .date {
+
+                }
+                .rating {
+
+                }
+                .description {
+                    margin-top: 15px;
+                }
+                .detail-info {
+                    position: absolute;
+                    width: 100%;
+                    bottom: 0;
+                    left: 0;
+                    padding: 15px;
+                    margin: 0;
+                    border-top: 1px solid #e3e3e3;
+
+
+                    .link {
+
+                    }
+                }
+            }
         }
     }
 }

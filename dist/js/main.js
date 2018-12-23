@@ -1,8 +1,10 @@
 'use strict';
 
 window.addEventListener('load', function (ev) {
-  var searchInput = document.getElementById("search-input");
+  var searchInput = document.getElementById("search-input"),
+      searchBtn = document.getElementById("search-btn");
   searchInput.addEventListener('change', searchInputHandler);
+  searchBtn.addEventListener('click', searchBtnHandler);
 });
 
 var videoAjaxRequest = function videoAjaxRequest(endPoint, queryString) {
@@ -31,8 +33,15 @@ var videoAjaxRequest = function videoAjaxRequest(endPoint, queryString) {
 };
 
 var searchInputHandler = function searchInputHandler(event) {
-  debugger;
+  // debugger;
   var queryString = '&query=' + event.target.value + '&language=ru-RU'; // videoAjaxRequest('/search/movie', '&query=Harry Potter&language=ru-RU');
 
   videoAjaxRequest('/search/movie', queryString);
+};
+
+var searchBtnHandler = function searchBtnHandler(event) {
+  event.preventDefault(); // debugger;
+  // let queryString = '&query=' + event.target.value + '&language=ru-RU';
+  //
+  // videoAjaxRequest('/search/movie', queryString);
 };
