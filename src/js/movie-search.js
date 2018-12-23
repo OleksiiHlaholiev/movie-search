@@ -25,11 +25,12 @@ const movieSearch = window.movieSearch || {
         DESCRIPTION_SYMBOLS_QUANTITY = 200,
         MOBILE_WIDTH = 500,
         MIN_SEARCH_QUERY_LENGTH = 2,
-        TIME_PROTECTION_MS = 2000,
+        TIME_PROTECTION_MS = 1000,
         URL_API_BASE = 'https://api.themoviedb.org/3',
         API_KEY = '?api_key=62b719d81284900a2580408f52cc3d78',
         IMG_W185_H278_PATH_BASE = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2/',
-        IMG_W350_H196_PATH_BASE = 'https://image.tmdb.org/t/p/w350_and_h196_bestv2/';
+        IMG_W350_H196_PATH_BASE = 'https://image.tmdb.org/t/p/w350_and_h196_bestv2/',
+        IMG_W300_H450_PATH_BASE = 'https://image.tmdb.org/t/p/w300_and_h450_bestv2/';
 
     let timerProtectionId,
         isBusyFlag = false;
@@ -121,7 +122,7 @@ const movieSearch = window.movieSearch || {
                     tempDateStr = itemObj.release_date;
 
                 tempItem.querySelector('.date').innerText = tempDateStr;
-                tempItem.querySelector('.rating').innerText = itemObj.vote_average;
+                tempItem.querySelector('.rating').innerText = 'Рейтинг: ' + itemObj.vote_average;
 
                 itemObj.overview.length > DESCRIPTION_SYMBOLS_QUANTITY ?
                     tempDescrStr = itemObj.overview.slice(0, DESCRIPTION_SYMBOLS_QUANTITY - 3) + '...' :

@@ -12,27 +12,3 @@
   font-style: normal; }
 
 /* ---------------------- END ------------------------------*/
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  outline: none;
-  border: none;
-  font-weight: normal; }
-
-html, body {
-  position: relative;
-  width: 100%;
-  background-color: #fff;
-  overflow-x: hidden;
-  font-weight: normal;
-  font-family: "ProximaNova-Regular", sans-serif; }
-
-section {
-  padding: 30px 0; }
-  section h1 {
-    margin-bottom: 30px;
-    font-size: 48px;
-    text-align: center;
-    color: blue;
-    font-family: "ProximaNova-Bold", sans-serif; }

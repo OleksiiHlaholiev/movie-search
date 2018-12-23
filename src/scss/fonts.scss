@@ -3,36 +3,15 @@
   font-family: 'ProximaNova-Regular';
   src: url("../fonts/ProximaNova-Regular/ProximaNova-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/ProximaNova-Regular/ProximaNova-Regular.otf") format("opentype"), url("../fonts/ProximaNova-Regular/ProximaNova-Regular.woff") format("woff"), url("../fonts/ProximaNova-Regular/ProximaNova-Regular.ttf") format("truetype"), url("../fonts/ProximaNova-Regular/ProximaNova-Regular.svg#ProximaNova-Regular") format("svg");
   font-weight: normal;
-  font-style: normal; }
+  font-style: normal;
+}
+$ProximaNovaRegular: "ProximaNova-Regular", sans-serif;
 
 @font-face {
   font-family: 'ProximaNova-Bold';
   src: url("../fonts/ProximaNova-Bold/ProximaNova-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/ProximaNova-Bold/ProximaNova-Bold.otf") format("opentype"), url("../fonts/ProximaNova-Bold/ProximaNova-Bold.woff") format("woff"), url("../fonts/ProximaNova-Bold/ProximaNova-Bold.ttf") format("truetype"), url("../fonts/ProximaNova-Bold/ProximaNova-Bold.svg#ProximaNova-Bold") format("svg");
   font-weight: normal;
-  font-style: normal; }
-
+  font-style: normal;
+}
+$ProximaNovaBold: "ProximaNova-Bold", sans-serif;
 /* ---------------------- END ------------------------------*/
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  outline: none;
-  border: none;
-  font-weight: normal; }
-
-html, body {
-  position: relative;
-  width: 100%;
-  background-color: #fff;
-  overflow-x: hidden;
-  font-weight: normal;
-  font-family: "ProximaNova-Regular", sans-serif; }
-
-section {
-  padding: 30px 0; }
-  section h1 {
-    margin-bottom: 30px;
-    font-size: 48px;
-    text-align: center;
-    color: blue;
-    font-family: "ProximaNova-Bold", sans-serif; }

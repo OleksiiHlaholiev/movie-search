@@ -1,4 +1,5 @@
-$mobileWidth: 1000px;
+@import 'constants';
+@import 'fonts';
 
 * {
   box-sizing: border-box;
@@ -17,4 +18,16 @@ html, body {
   background-color: #fff;
   overflow-x: hidden;
   font-weight: normal;
+  font-family: $ProximaNovaRegular;
+}
+
+section {
+  padding: 30px 0;
+  h1 {
+    margin-bottom: 30px;
+    font-size: 48px;
+    text-align: center;
+    color: blue;
+    font-family: $ProximaNovaBold;
+  }
 }
