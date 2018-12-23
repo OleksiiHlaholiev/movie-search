@@ -24,12 +24,30 @@ const movieSearch = window.movieSearch || {
 
         DESCRIPTION_SYMBOLS_QUANTITY = 200,
         MOBILE_WIDTH = 500,
-        MIN_SEARCH_QUERY_LENGTH = 3,
+        MIN_SEARCH_QUERY_LENGTH = 2,
         TIME_PROTECTION_MS = 2000,
         URL_API_BASE = 'https://api.themoviedb.org/3',
         API_KEY = '?api_key=62b719d81284900a2580408f52cc3d78',
         IMG_W185_H278_PATH_BASE = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2/',
         IMG_W350_H196_PATH_BASE = 'https://image.tmdb.org/t/p/w350_and_h196_bestv2/';
+
+    let timerProtectionId,
+        isBusyFlag = false;
+
+    // -------------------------------- START --------------------------------------
+
+    let timerStop = () => {
+        isBusyFlag = false;
+        clearTimeout(timerProtectionId);
+    };
+
+    let timerStart = (successCallback) => {
+        isBusyFlag = true;
+        timerProtectionId = setTimeout(() => {
+            timerStop();
+            successCallback();
+        }, TIME_PROTECTION_MS);
+    };
 
     let videoAjaxRequest = (endPoint, queryString, successCallback) => {
         let xhr = new XMLHttpRequest(),
@@ -134,9 +152,11 @@ const movieSearch = window.movieSearch || {
     };
 
     let searchVideoRequest = () => {
-        if (searchInput.value.length >= MIN_SEARCH_QUERY_LENGTH) {
-            let queryString = '&query=' + searchInput.value + '&language=ru-RU';
-            videoAjaxRequest('/search/movie', queryString, updateContentCallback);
+        if (searchInput.value.length >= MIN_SEARCH_QUERY_LENGTH && !isBusyFlag) {
+            timerStart(() => {
+                let queryString = '&query=' + searchInput.value + '&language=ru-RU';
+                videoAjaxRequest('/search/movie', queryString, updateContentCallback);
+            });
         }
     };
 
@@ -150,7 +170,7 @@ const movieSearch = window.movieSearch || {
     };
 
     let registerHandlers = () => {
-        searchInput.addEventListener('change', searchInputHandler);
+        searchInput.addEventListener('input', searchInputHandler);
         searchBtn.addEventListener('click', searchBtnHandler);
     };
 
@@ -159,6 +179,8 @@ const movieSearch = window.movieSearch || {
     __ms.init = () => {
         registerHandlers();
     };
+
+    // -------------------------------- END --------------------------------------
 })(movieSearch);
 
 
