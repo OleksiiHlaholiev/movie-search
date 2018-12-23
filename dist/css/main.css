@@ -1,5 +1,5 @@
 section {
-  padding-top: 50px; }
+  padding: 30px 0; }
   section h1 {
     margin-bottom: 30px;
     font-size: 48px;
@@ -25,6 +25,8 @@ section {
   margin-top: 50px; }
   .search-results .results-cont {
     margin-top: 30px; }
+    .search-results .results-cont .item.template {
+      display: none; }
     .search-results .results-cont .item {
       display: flex;
       flex-direction: row;
@@ -50,6 +52,8 @@ section {
             width: 100%; } }
         .search-results .results-cont .item .info-cont p {
           margin-bottom: 5px; }
+        .search-results .results-cont .item .info-cont .name {
+          font-size: 1.5rem; }
         .search-results .results-cont .item .info-cont .description {
           margin-top: 15px; }
         .search-results .results-cont .item .info-cont .detail-info {
