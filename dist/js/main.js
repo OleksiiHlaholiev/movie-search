@@ -1,8 +1,8 @@
 'use strict';
 
+var searchInput = document.getElementById("search-input"),
+    searchBtn = document.getElementById("search-btn");
 window.addEventListener('load', function (ev) {
-  var searchInput = document.getElementById("search-input"),
-      searchBtn = document.getElementById("search-btn");
   searchInput.addEventListener('change', searchInputHandler);
   searchBtn.addEventListener('click', searchBtnHandler);
 });
@@ -40,8 +40,8 @@ var searchInputHandler = function searchInputHandler(event) {
 };
 
 var searchBtnHandler = function searchBtnHandler(event) {
-  event.preventDefault(); // debugger;
-  // let queryString = '&query=' + event.target.value + '&language=ru-RU';
+  event.preventDefault();
+  debugger; // let queryString = '&query=' + event.target.value + '&language=ru-RU';
   //
   // videoAjaxRequest('/search/movie', queryString);
 };

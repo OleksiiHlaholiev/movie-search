@@ -29,6 +29,7 @@ section {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
+      margin-bottom: 20px;
       border: 1px solid #e3e3e3;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); }
       .search-results .results-cont .item .img-cont {

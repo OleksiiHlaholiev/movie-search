@@ -1,9 +1,9 @@
 'use strict';
 
-window.addEventListener('load', function (ev) {
-    let searchInput = document.getElementById("search-input"),
-        searchBtn = document.getElementById("search-btn");
+const searchInput = document.getElementById("search-input"),
+    searchBtn = document.getElementById("search-btn");
 
+window.addEventListener('load', function (ev) {
     searchInput.addEventListener('change', searchInputHandler);
     searchBtn.addEventListener('click', searchBtnHandler);
 });
@@ -45,7 +45,7 @@ let searchInputHandler = (event) => {
 
 let searchBtnHandler = (event) => {
     event.preventDefault();
-    // debugger;
+    debugger;
     // let queryString = '&query=' + event.target.value + '&language=ru-RU';
     //
     // videoAjaxRequest('/search/movie', queryString);
