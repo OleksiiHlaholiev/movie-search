@@ -32,5 +32,5 @@ let videoAjaxRequest = (endPoint, queryString) => {
 };
 
 (() => {
-    alert("Hi Hi!");
+    // alert("Hi Hi Hi Hi!");
 })();
