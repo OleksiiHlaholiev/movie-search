@@ -1,5 +1,5 @@
-@import "mixins";
-@import "general-styles";
+@import 'mixins';
+@import 'general-styles';
 
 
 .form-cont {
@@ -107,3 +107,5 @@
         }
     }
 }
+
+@import 'details';

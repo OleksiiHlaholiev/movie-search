@@ -89,19 +89,19 @@ const movieSearch = window.movieSearch || {
 
     let monthDecoder = (monthNumber) => {
         var monthNamesArr = [
-                'января',
-                'февраля',
-                'марта',
-                'апреля',
-                'мая',
-                'июня',
-                'июля',
-                'августа',
-                'сентября',
-                'октября',
-                'ноября',
-                'декабря'
-            ];
+            'января',
+            'февраля',
+            'марта',
+            'апреля',
+            'мая',
+            'июня',
+            'июля',
+            'августа',
+            'сентября',
+            'октября',
+            'ноября',
+            'декабря'
+        ];
 
         return monthNamesArr[monthNumber] ? monthNamesArr[monthNumber] : '';
     };
@@ -139,7 +139,7 @@ const movieSearch = window.movieSearch || {
                 tempItem.querySelector('.description').innerText = tempDescrStr;
 
                 window.innerWidth > MOBILE_WIDTH ?
-                    currentImgBase = IMG_W185_H278_PATH_BASE:
+                    currentImgBase = IMG_W185_H278_PATH_BASE :
                     currentImgBase = IMG_W350_H196_PATH_BASE;
 
                 tempItem.querySelector('.img-cont img.poster').setAttribute('src', currentImgBase + itemObj.poster_path);
@@ -183,7 +183,9 @@ const movieSearch = window.movieSearch || {
         searchBtn.addEventListener('click', searchBtnHandler);
     };
 
-    document.querySelector('.search-results .item.template').remove();
+    if (searchInput && searchBtn && itemTemplate && resultsCont && resultsTitle) {
+        document.querySelector('.search-results .item.template').remove();
+    }
 
     // interface
 
@@ -192,6 +194,7 @@ const movieSearch = window.movieSearch || {
     };
 
     __ms.getMovieById = getMovieByIdRequest;
+    __ms.monthDecoder = monthDecoder;
 
     // -------------------------------- END --------------------------------------
 })(movieSearch);

@@ -11,6 +11,7 @@ const detailInfo = window.detailInfo || {
         resultsTitle = document.querySelector('.search-results .results-title'),
         videoId = window.location.search.split("id=")[1],
 
+        MOBILE_WIDTH = 500,
         IMG_W185_H278_PATH_BASE = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2/',
         IMG_W350_H196_PATH_BASE = 'https://image.tmdb.org/t/p/w350_and_h196_bestv2/',
         IMG_W300_H450_PATH_BASE = 'https://image.tmdb.org/t/p/w300_and_h450_bestv2/';
@@ -18,15 +19,12 @@ const detailInfo = window.detailInfo || {
     // -------------------------------- START --------------------------------------
 
     let updateContent = (itemObj) => {
-        debugger;
         resultsCont.innerHTML = ''; // delete all nodes
         if (itemObj) {
             let tempItem,
                 tempDate,
                 tempDateStr,
                 currentImgBase;
-
-            resultsTitle.innerText = 'Найденные фильмы';
 
             tempItem = itemTemplate.cloneNode(true);
             tempItem.classList.remove('template');
@@ -36,7 +34,7 @@ const detailInfo = window.detailInfo || {
 
             tempDate = new Date(itemObj.release_date);
             (tempDate != 'Invalid Date') ?
-                tempDateStr = tempDate.getDate() + ' ' + monthDecoder(tempDate.getMonth()) + ' ' + tempDate.getFullYear() :
+                tempDateStr = tempDate.getDate() + ' ' + movieSearch.monthDecoder(tempDate.getMonth()) + ' ' + tempDate.getFullYear() :
                 tempDateStr = itemObj.release_date;
 
             tempItem.querySelector('.date').innerText = tempDateStr;
@@ -44,7 +42,7 @@ const detailInfo = window.detailInfo || {
             tempItem.querySelector('.description').innerText = itemObj.overview;
 
             window.innerWidth > MOBILE_WIDTH ?
-                currentImgBase = IMG_W185_H278_PATH_BASE:
+                currentImgBase = IMG_W300_H450_PATH_BASE:
                 currentImgBase = IMG_W350_H196_PATH_BASE;
 
             tempItem.querySelector('.img-cont img.poster').setAttribute('src', currentImgBase + itemObj.poster_path);
@@ -58,7 +56,9 @@ const detailInfo = window.detailInfo || {
         }
     };
 
-    // document.querySelector('.search-results .item.template').remove();
+    if (itemTemplate && resultsCont && resultsTitle) {
+        document.querySelector('.search-results .item.template').remove();
+    }
 
     __di.init = () => {
         // registerHandlers();

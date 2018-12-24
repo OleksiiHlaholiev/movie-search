@@ -1,0 +1,27 @@
+.movie-details-section {
+    .search-results {
+        .results-cont {
+            .item {
+                .img-cont {
+                    width: 300px;
+                    @include mediaMaxWidth($mobileWidth) {
+                        width: 100%;
+                    }
+                }
+
+                .info-cont {
+                    width: calc(100% - 300px);
+
+                    @include mediaMaxWidth($mobileWidth) {
+                        width: 100%;
+                    }
+
+                    .name {
+                        font-size: 2.4rem;
+                    }
+
+                }
+            }
+        }
+    }
+}

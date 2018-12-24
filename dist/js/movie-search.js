@@ -142,11 +142,15 @@ var movieSearch = window.movieSearch || {
     searchBtn.addEventListener('click', searchBtnHandler);
   };
 
-  document.querySelector('.search-results .item.template').remove(); // interface
+  if (searchInput && searchBtn && itemTemplate && resultsCont && resultsTitle) {
+    document.querySelector('.search-results .item.template').remove();
+  } // interface
+
 
   __ms.init = function () {
     registerHandlers();
   };
 
-  __ms.getMovieById = getMovieByIdRequest; // -------------------------------- END --------------------------------------
+  __ms.getMovieById = getMovieByIdRequest;
+  __ms.monthDecoder = monthDecoder; // -------------------------------- END --------------------------------------
 })(movieSearch);
