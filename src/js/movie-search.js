@@ -40,12 +40,12 @@ const movieSearch = window.movieSearch || {
 
     // -------------------------------- START --------------------------------------
 
-    let timerStop = () => {
+    const timerStop = () => {
         isBusyFlag = false;
         clearTimeout(timerProtectionId);
     };
 
-    let timerStart = (successCallback) => {
+    const timerStart = (successCallback) => {
         isBusyFlag = true;
         timerProtectionId = setTimeout(() => {
             timerStop();
@@ -53,7 +53,7 @@ const movieSearch = window.movieSearch || {
         }, TIME_PROTECTION_MS);
     };
 
-    let videoAjaxRequest = (endPoint, queryString, successCallback) => {
+    const videoAjaxRequest = (endPoint, queryString, successCallback) => {
         let xhr = new XMLHttpRequest(),
             data = '{}',
             requestUrl;
@@ -82,7 +82,7 @@ const movieSearch = window.movieSearch || {
         }
     };
 
-    let getMovieByIdRequest = (videoId, successCallback) => {
+    const getMovieByIdRequest = (videoId, successCallback) => {
         // https://api.themoviedb.org/3/movie/8467?api_key=62b719d81284900a2580408f52cc3d78&language=ru-RU
         if (videoId) {
             let queryString = '&language=ru-RU';
@@ -90,7 +90,7 @@ const movieSearch = window.movieSearch || {
         }
     };
 
-    let monthDecoder = (monthNumber) => {
+    const monthDecoder = (monthNumber) => {
         var monthNamesArr = [
             'января',
             'февраля',
@@ -109,7 +109,7 @@ const movieSearch = window.movieSearch || {
         return monthNamesArr[monthNumber] ? monthNamesArr[monthNumber] : '';
     };
 
-    let updateContent = (itemsArray) => {
+    const updateContent = (itemsArray) => {
         resultsCont.innerHTML = ''; // delete all nodes
         if (itemsArray && itemsArray.length) {
             let tempItem,
@@ -157,14 +157,14 @@ const movieSearch = window.movieSearch || {
         }
     };
 
-    let updateContentCallback = (resultObj) => {
+    const updateContentCallback = (resultObj) => {
         if (resultObj && resultObj.results) {
             updateContent(resultObj.results);
             updatePagination(resultObj.total_pages, resultObj.page, PAGINATION_ITEMS_PER_PAGE);
         }
     };
 
-    let paginationBtnHandler = (event) => {
+    const paginationBtnHandler = (event) => {
         if (!event.currentTarget.classList.contains("disabled") &&
             !event.currentTarget.classList.contains("active"))
         {
@@ -180,7 +180,7 @@ const movieSearch = window.movieSearch || {
         }
     };
 
-    let addPaginationBtn = (value, activeCurrentIndex) => {
+    const addPaginationBtn = (value, activeCurrentIndex) => {
         var tempPaginationBtn = pageItemTemplate.cloneNode(true);
 
         if (tempPaginationBtn.classList.contains("active") &&
@@ -198,7 +198,7 @@ const movieSearch = window.movieSearch || {
     };
 
     // additional fucntion: used to add several items
-    let updatePagination = (totalPages, pageNumber, itemsPerPage) => {
+    const updatePagination = (totalPages, pageNumber, itemsPerPage) => {
         let i;
         removePagination();
         pagination.classList.add('active');
@@ -214,7 +214,7 @@ const movieSearch = window.movieSearch || {
         // }
     };
 
-    let removePagination = () => {
+    const removePagination = () => {
         let currentPaginationItems = document.querySelectorAll('.pagination .page-item:not(.spec)');
         pagination.classList.remove('active');
         if (currentPaginationItems.length) {
@@ -224,7 +224,7 @@ const movieSearch = window.movieSearch || {
         }
     };
 
-    let searchVideoRequest = (page) => {
+    const searchVideoRequest = (page) => {
         if (searchInput.value.length >= MIN_SEARCH_QUERY_LENGTH && !isBusyFlag && page) {
             timerStart(() => {
                 let queryString = '&query=' + searchInput.value + '&language=ru-RU&page=' + page;
@@ -233,16 +233,16 @@ const movieSearch = window.movieSearch || {
         }
     };
 
-    let searchInputHandler = (event) => {
+    const searchInputHandler = (event) => {
         searchVideoRequest(1);
     };
 
-    let searchBtnHandler = (event) => {
+    const searchBtnHandler = (event) => {
         event.preventDefault();
         searchVideoRequest(1);
     };
 
-    let registerHandlers = () => {
+    const registerHandlers = () => {
         searchInput.addEventListener('input', searchInputHandler);
         searchBtn.addEventListener('click', searchBtnHandler);
     };

@@ -1,1 +1,58 @@
-"use strict";var detailInfo=window.detailInfo||{__namespace:!0};!function(e){var o=document.querySelector(".movie-details-section"),a=document.querySelector(".search-results .item.template"),d=document.querySelector(".search-results .results-cont"),l=document.querySelector(".search-results .results-title"),t=window.location.search.split("id=")[1];a&&d&&l&&document.querySelector(".search-results .item.template").remove(),e.init=function(){o.classList.add("loaded")},movieSearch.getMovieById(t,function(e){var t,r,i,n;d.innerHTML="",e?((t=a.cloneNode(!0)).classList.remove("template"),o.style.backgroundImage="https://image.tmdb.org/t/p/w1400_and_h450_face/"+e.backdrop_path,t.setAttribute("data-video-id",e.id),t.querySelector(".name").innerText=e.title,i="Invalid Date"!=(r=new Date(e.release_date))?r.getDate()+" "+movieSearch.monthDecoder(r.getMonth())+" "+r.getFullYear():e.release_date,t.querySelector(".date").innerText=i,t.querySelector(".rating").innerText="Рейтинг: "+e.vote_average,t.querySelector(".description").innerText=e.overview,n=500<window.innerWidth?"https://image.tmdb.org/t/p/w300_and_h450_bestv2/":"https://image.tmdb.org/t/p/w350_and_h196_bestv2/",t.querySelector(".img-cont img.poster").setAttribute("src",n+e.poster_path),t.querySelectorAll(".link").forEach(function(e,t){e.setAttribute("href","/details.html")}),d.appendChild(t)):l.innerText="По вашему запросу ничего не найдено"})}(detailInfo),window.addEventListener("load",function(){detailInfo.init()});
+'use strict';
+
+var detailInfo = window.detailInfo || {
+  __namespace: true
+};
+
+(function (__di) {
+  var movieDetailsSection = document.querySelector('.movie-details-section'),
+      itemTemplate = document.querySelector('.search-results .item.template'),
+      resultsCont = document.querySelector('.search-results .results-cont'),
+      resultsTitle = document.querySelector('.search-results .results-title'),
+      videoId = window.location.search.split("id=")[1],
+      MOBILE_WIDTH = 500,
+      IMG_W185_H278_PATH_BASE = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2/',
+      IMG_W350_H196_PATH_BASE = 'https://image.tmdb.org/t/p/w350_and_h196_bestv2/',
+      IMG_W300_H450_PATH_BASE = 'https://image.tmdb.org/t/p/w300_and_h450_bestv2/',
+      IMG_W1400_H450_PATH_BASE = 'https://image.tmdb.org/t/p/w1400_and_h450_face/'; // -------------------------------- START --------------------------------------
+
+  var updateContent = function updateContent(itemObj) {
+    resultsCont.innerHTML = ''; // delete all nodes
+
+    if (itemObj) {
+      var tempItem, tempDate, tempDateStr, currentImgBase;
+      tempItem = itemTemplate.cloneNode(true);
+      tempItem.classList.remove('template');
+      movieDetailsSection.style.backgroundImage = 'url(\'' + IMG_W1400_H450_PATH_BASE + itemObj.backdrop_path + '\')';
+      tempItem.setAttribute('data-video-id', itemObj.id);
+      tempItem.querySelector('.name').innerText = itemObj.title;
+      tempDate = new Date(itemObj.release_date);
+      tempDate != 'Invalid Date' ? tempDateStr = tempDate.getDate() + ' ' + movieSearch.monthDecoder(tempDate.getMonth()) + ' ' + tempDate.getFullYear() : tempDateStr = itemObj.release_date;
+      tempItem.querySelector('.date').innerText = tempDateStr;
+      tempItem.querySelector('.rating').innerText = 'Рейтинг: ' + itemObj.vote_average;
+      tempItem.querySelector('.description').innerText = itemObj.overview;
+      window.innerWidth > MOBILE_WIDTH ? currentImgBase = IMG_W300_H450_PATH_BASE : currentImgBase = IMG_W350_H196_PATH_BASE;
+      tempItem.querySelector('.img-cont img.poster').setAttribute('src', currentImgBase + itemObj.poster_path);
+      tempItem.querySelectorAll('.link').forEach(function (itemLink, i) {
+        itemLink.setAttribute('href', '/details.html');
+      });
+      resultsCont.appendChild(tempItem);
+    } else {
+      resultsTitle.innerText = 'По вашему запросу ничего не найдено';
+    }
+  };
+
+  if (itemTemplate && resultsCont && resultsTitle) {
+    document.querySelector('.search-results .item.template').remove();
+  }
+
+  __di.init = function () {
+    movieDetailsSection.classList.add('loaded');
+  };
+
+  movieSearch.getMovieById(videoId, updateContent); // -------------------------------- END --------------------------------------
+})(detailInfo);
+
+window.addEventListener('load', function () {
+  detailInfo.init();
+});

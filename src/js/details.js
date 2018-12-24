@@ -20,7 +20,7 @@ const detailInfo = window.detailInfo || {
 
     // -------------------------------- START --------------------------------------
 
-    let updateContent = (itemObj) => {
+    const updateContent = (itemObj) => {
         resultsCont.innerHTML = ''; // delete all nodes
         if (itemObj) {
             let tempItem,
@@ -31,7 +31,7 @@ const detailInfo = window.detailInfo || {
             tempItem = itemTemplate.cloneNode(true);
             tempItem.classList.remove('template');
 
-            movieDetailsSection.style.backgroundImage = IMG_W1400_H450_PATH_BASE + itemObj.backdrop_path;
+            movieDetailsSection.style.backgroundImage = 'url(\'' + IMG_W1400_H450_PATH_BASE + itemObj.backdrop_path + '\')';
             tempItem.setAttribute('data-video-id', itemObj.id);
             tempItem.querySelector('.name').innerText = itemObj.title;
 
