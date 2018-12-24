@@ -109,6 +109,8 @@
 }
 
 .pagination {
+    flex-wrap: wrap;
+
     &:not(.active) {
         display: none;
     }

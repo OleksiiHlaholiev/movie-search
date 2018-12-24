@@ -119,7 +119,19 @@ var movieSearch = window.movieSearch || {
   var updateContentCallback = function updateContentCallback(resultObj) {
     if (resultObj && resultObj.results) {
       updateContent(resultObj.results);
-      addPagination(resultObj.total_pages, resultObj.page, PAGINATION_ITEMS_PER_PAGE);
+      updatePagination(resultObj.total_pages, resultObj.page, PAGINATION_ITEMS_PER_PAGE);
+    }
+  };
+
+  var paginationBtnHandler = function paginationBtnHandler(event) {
+    if (!event.currentTarget.classList.contains("disabled") && !event.currentTarget.classList.contains("active")) {
+      var prevActiveItem = document.querySelector(".page-item.active"),
+          page;
+      prevActiveItem.classList.remove("active");
+      event.currentTarget.classList.add("active");
+      page = event.currentTarget.getAttribute('data-page');
+      searchVideoRequest(page);
+      document.querySelector('.movie-search-section').scrollIntoView(true);
     }
   };
 
@@ -132,13 +144,13 @@ var movieSearch = window.movieSearch || {
 
     tempPaginationBtn.setAttribute('data-page', value);
     tempPaginationBtn.querySelector('.page-link').innerText = value;
-    tempPaginationBtn.classList.remove('template'); // tempPaginationBtn.addEventListener('click', paginationBtnHandler);
-
+    tempPaginationBtn.classList.remove('template');
+    tempPaginationBtn.addEventListener('click', paginationBtnHandler);
     pagination.insertBefore(tempPaginationBtn, pagination.lastElementChild);
   }; // additional fucntion: used to add several items
 
 
-  var addPagination = function addPagination(totalPages, pageNumber, itemsPerPage) {
+  var updatePagination = function updatePagination(totalPages, pageNumber, itemsPerPage) {
     var i;
     removePagination();
     pagination.classList.add('active');
@@ -164,22 +176,22 @@ var movieSearch = window.movieSearch || {
     }
   };
 
-  var searchVideoRequest = function searchVideoRequest() {
-    if (searchInput.value.length >= MIN_SEARCH_QUERY_LENGTH && !isBusyFlag) {
+  var searchVideoRequest = function searchVideoRequest(page) {
+    if (searchInput.value.length >= MIN_SEARCH_QUERY_LENGTH && !isBusyFlag && page) {
       timerStart(function () {
-        var queryString = '&query=' + searchInput.value + '&language=ru-RU';
+        var queryString = '&query=' + searchInput.value + '&language=ru-RU&page=' + page;
         videoAjaxRequest('/search/movie', queryString, updateContentCallback);
       });
     }
   };
 
   var searchInputHandler = function searchInputHandler(event) {
-    searchVideoRequest();
+    searchVideoRequest(1);
   };
 
   var searchBtnHandler = function searchBtnHandler(event) {
     event.preventDefault();
-    searchVideoRequest();
+    searchVideoRequest(1);
   };
 
   var registerHandlers = function registerHandlers() {

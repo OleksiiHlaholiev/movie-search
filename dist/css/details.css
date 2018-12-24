@@ -1,0 +1,13 @@
+.movie-details-section .search-results .results-cont .item .img-cont {
+  width: 300px; }
+  @media all and (max-width: 1000px) {
+    .movie-details-section .search-results .results-cont .item .img-cont {
+      width: 100%; } }
+
+.movie-details-section .search-results .results-cont .item .info-cont {
+  width: calc(100% - 300px); }
+  @media all and (max-width: 1000px) {
+    .movie-details-section .search-results .results-cont .item .info-cont {
+      width: 100%; } }
+  .movie-details-section .search-results .results-cont .item .info-cont .name {
+    font-size: 2.4rem; }

@@ -160,7 +160,23 @@ const movieSearch = window.movieSearch || {
     let updateContentCallback = (resultObj) => {
         if (resultObj && resultObj.results) {
             updateContent(resultObj.results);
-            addPagination(resultObj.total_pages, resultObj.page, PAGINATION_ITEMS_PER_PAGE);
+            updatePagination(resultObj.total_pages, resultObj.page, PAGINATION_ITEMS_PER_PAGE);
+        }
+    };
+
+    let paginationBtnHandler = (event) => {
+        if (!event.currentTarget.classList.contains("disabled") &&
+            !event.currentTarget.classList.contains("active"))
+        {
+            let prevActiveItem = document.querySelector(".page-item.active"),
+                page;
+
+            prevActiveItem.classList.remove("active");
+            event.currentTarget.classList.add("active");
+            page = event.currentTarget.getAttribute('data-page');
+
+            searchVideoRequest(page);
+            document.querySelector('.movie-search-section').scrollIntoView(true);
         }
     };
 
@@ -176,13 +192,13 @@ const movieSearch = window.movieSearch || {
         tempPaginationBtn.setAttribute('data-page', value);
         tempPaginationBtn.querySelector('.page-link').innerText = value;
         tempPaginationBtn.classList.remove('template');
-        // tempPaginationBtn.addEventListener('click', paginationBtnHandler);
+        tempPaginationBtn.addEventListener('click', paginationBtnHandler);
 
         pagination.insertBefore(tempPaginationBtn, pagination.lastElementChild)
     };
 
     // additional fucntion: used to add several items
-    let addPagination = (totalPages, pageNumber, itemsPerPage) => {
+    let updatePagination = (totalPages, pageNumber, itemsPerPage) => {
         let i;
         removePagination();
         pagination.classList.add('active');
@@ -208,22 +224,22 @@ const movieSearch = window.movieSearch || {
         }
     };
 
-    let searchVideoRequest = () => {
-        if (searchInput.value.length >= MIN_SEARCH_QUERY_LENGTH && !isBusyFlag) {
+    let searchVideoRequest = (page) => {
+        if (searchInput.value.length >= MIN_SEARCH_QUERY_LENGTH && !isBusyFlag && page) {
             timerStart(() => {
-                let queryString = '&query=' + searchInput.value + '&language=ru-RU';
+                let queryString = '&query=' + searchInput.value + '&language=ru-RU&page=' + page;
                 videoAjaxRequest('/search/movie', queryString, updateContentCallback);
             });
         }
     };
 
     let searchInputHandler = (event) => {
-        searchVideoRequest();
+        searchVideoRequest(1);
     };
 
     let searchBtnHandler = (event) => {
         event.preventDefault();
-        searchVideoRequest();
+        searchVideoRequest(1);
     };
 
     let registerHandlers = () => {

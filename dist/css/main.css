@@ -105,8 +105,9 @@ section {
             .search-results .results-cont .item .info-cont .detail-info {
               position: relative; } }
 
-.pagination:not(.active) {
-  display: none; }
-
-.pagination .page-item.active .page-link {
-  cursor: default !important; }
+.pagination {
+  flex-wrap: wrap; }
+  .pagination:not(.active) {
+    display: none; }
+  .pagination .page-item.active .page-link {
+    cursor: default !important; }
