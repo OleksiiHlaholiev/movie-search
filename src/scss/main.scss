@@ -108,4 +108,15 @@
     }
 }
 
-@import 'details';
+.pagination {
+    &:not(.active) {
+        display: none;
+    }
+
+    .page-item.active .page-link {
+        cursor: default !important;
+    }
+}
+
+
+//@import 'details';

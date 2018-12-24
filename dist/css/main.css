@@ -34,7 +34,7 @@ section {
     margin-bottom: 30px;
     font-size: 48px;
     text-align: center;
-    color: blue;
+    color: #007bff;
     font-family: "ProximaNova-Bold", sans-serif; }
 
 .form-cont .input-group-text {
@@ -105,16 +105,8 @@ section {
             .search-results .results-cont .item .info-cont .detail-info {
               position: relative; } }
 
-.movie-details-section .search-results .results-cont .item .img-cont {
-  width: 300px; }
-  @media all and (max-width: 1000px) {
-    .movie-details-section .search-results .results-cont .item .img-cont {
-      width: 100%; } }
+.pagination:not(.active) {
+  display: none; }
 
-.movie-details-section .search-results .results-cont .item .info-cont {
-  width: calc(100% - 300px); }
-  @media all and (max-width: 1000px) {
-    .movie-details-section .search-results .results-cont .item .info-cont {
-      width: 100%; } }
-  .movie-details-section .search-results .results-cont .item .info-cont .name {
-    font-size: 2.4rem; }
+.pagination .page-item.active .page-link {
+  cursor: default !important; }

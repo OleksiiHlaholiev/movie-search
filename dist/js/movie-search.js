@@ -19,6 +19,9 @@ var movieSearch = window.movieSearch || {
       itemTemplate = document.querySelector('.search-results .item.template'),
       resultsCont = document.querySelector('.search-results .results-cont'),
       resultsTitle = document.querySelector('.search-results .results-title'),
+      pagination = document.querySelector('.pagination'),
+      pageItemTemplate = document.querySelector('.pagination .page-item.template'),
+      PAGINATION_ITEMS_PER_PAGE = 20,
       DESCRIPTION_SYMBOLS_QUANTITY = 200,
       MOBILE_WIDTH = 500,
       MIN_SEARCH_QUERY_LENGTH = 1,
@@ -116,6 +119,48 @@ var movieSearch = window.movieSearch || {
   var updateContentCallback = function updateContentCallback(resultObj) {
     if (resultObj && resultObj.results) {
       updateContent(resultObj.results);
+      addPagination(resultObj.total_pages, resultObj.page, PAGINATION_ITEMS_PER_PAGE);
+    }
+  };
+
+  var addPaginationBtn = function addPaginationBtn(value, activeCurrentIndex) {
+    var tempPaginationBtn = pageItemTemplate.cloneNode(true);
+
+    if (tempPaginationBtn.classList.contains("active") && value != activeCurrentIndex) {
+      tempPaginationBtn.classList.remove("active");
+    }
+
+    tempPaginationBtn.setAttribute('data-page', value);
+    tempPaginationBtn.querySelector('.page-link').innerText = value;
+    tempPaginationBtn.classList.remove('template'); // tempPaginationBtn.addEventListener('click', paginationBtnHandler);
+
+    pagination.insertBefore(tempPaginationBtn, pagination.lastElementChild);
+  }; // additional fucntion: used to add several items
+
+
+  var addPagination = function addPagination(totalPages, pageNumber, itemsPerPage) {
+    var i;
+    removePagination();
+    pagination.classList.add('active');
+
+    if (totalPages) {
+      for (i = 1; i <= totalPages; i++) {
+        addPaginationBtn(i, pageNumber);
+      }
+    } // for (i = pageNumber * itemsPerPage; i < pageNumber * itemsPerPage + itemsPerPage; i++) {
+    //     addItem(videoArr[i]);
+    // }
+
+  };
+
+  var removePagination = function removePagination() {
+    var currentPaginationItems = document.querySelectorAll('.pagination .page-item:not(.spec)');
+    pagination.classList.remove('active');
+
+    if (currentPaginationItems.length) {
+      currentPaginationItems.forEach(function (item, i) {
+        item.remove();
+      });
     }
   };
 
@@ -144,7 +189,8 @@ var movieSearch = window.movieSearch || {
 
   if (searchInput && searchBtn && itemTemplate && resultsCont && resultsTitle) {
     document.querySelector('.search-results .item.template').remove();
-  } // interface
+    document.querySelector('.pagination .page-item.template').remove();
+  } // -------------------------------- INTERFACE --------------------------------------
 
 
   __ms.init = function () {
