@@ -147,7 +147,7 @@ const movieSearch = window.movieSearch || {
 
                 tempItem.querySelector('.img-cont img.poster').setAttribute('src', currentImgBase + itemObj.poster_path);
                 tempItem.querySelectorAll('.link').forEach((itemLink, i) => {
-                    itemLink.setAttribute('href', '/details.html?id=' + itemObj.id);
+                    itemLink.setAttribute('href', window.location.href + 'details.html?id=' + itemObj.id);
                 });
 
                 resultsCont.appendChild(tempItem);
