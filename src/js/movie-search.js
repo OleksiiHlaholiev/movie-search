@@ -24,7 +24,7 @@ const movieSearch = window.movieSearch || {
 
         DESCRIPTION_SYMBOLS_QUANTITY = 200,
         MOBILE_WIDTH = 500,
-        MIN_SEARCH_QUERY_LENGTH = 2,
+        MIN_SEARCH_QUERY_LENGTH = 1,
         TIME_PROTECTION_MS = 1000,
         URL_API_BASE = 'https://api.themoviedb.org/3',
         API_KEY = '?api_key=62b719d81284900a2580408f52cc3d78',
@@ -76,6 +76,14 @@ const movieSearch = window.movieSearch || {
                     successCallback(resultObj);
                 }
             }
+        }
+    };
+
+    let getMovieByIdRequest = (videoId, successCallback) => {
+        // https://api.themoviedb.org/3/movie/8467?api_key=62b719d81284900a2580408f52cc3d78&language=ru-RU
+        if (videoId) {
+            let queryString = '&language=ru-RU';
+            videoAjaxRequest('/movie/' + videoId, queryString, successCallback);
         }
     };
 
@@ -136,7 +144,7 @@ const movieSearch = window.movieSearch || {
 
                 tempItem.querySelector('.img-cont img.poster').setAttribute('src', currentImgBase + itemObj.poster_path);
                 tempItem.querySelectorAll('.link').forEach((itemLink, i) => {
-                    itemLink.setAttribute('href', '/details.html');
+                    itemLink.setAttribute('href', '/details.html?id=' + itemObj.id);
                 });
 
                 resultsCont.appendChild(tempItem);
@@ -177,9 +185,13 @@ const movieSearch = window.movieSearch || {
 
     document.querySelector('.search-results .item.template').remove();
 
+    // interface
+
     __ms.init = () => {
         registerHandlers();
     };
+
+    __ms.getMovieById = getMovieByIdRequest;
 
     // -------------------------------- END --------------------------------------
 })(movieSearch);

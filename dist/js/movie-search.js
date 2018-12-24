@@ -21,7 +21,7 @@ var movieSearch = window.movieSearch || {
       resultsTitle = document.querySelector('.search-results .results-title'),
       DESCRIPTION_SYMBOLS_QUANTITY = 200,
       MOBILE_WIDTH = 500,
-      MIN_SEARCH_QUERY_LENGTH = 2,
+      MIN_SEARCH_QUERY_LENGTH = 1,
       TIME_PROTECTION_MS = 1000,
       URL_API_BASE = 'https://api.themoviedb.org/3',
       API_KEY = '?api_key=62b719d81284900a2580408f52cc3d78',
@@ -71,6 +71,14 @@ var movieSearch = window.movieSearch || {
     };
   };
 
+  var getMovieByIdRequest = function getMovieByIdRequest(videoId, successCallback) {
+    // https://api.themoviedb.org/3/movie/8467?api_key=62b719d81284900a2580408f52cc3d78&language=ru-RU
+    if (videoId) {
+      var queryString = '&language=ru-RU';
+      videoAjaxRequest('/movie/' + videoId, queryString, successCallback);
+    }
+  };
+
   var monthDecoder = function monthDecoder(monthNumber) {
     var monthNamesArr = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
     return monthNamesArr[monthNumber] ? monthNamesArr[monthNumber] : '';
@@ -96,7 +104,7 @@ var movieSearch = window.movieSearch || {
         window.innerWidth > MOBILE_WIDTH ? currentImgBase = IMG_W185_H278_PATH_BASE : currentImgBase = IMG_W350_H196_PATH_BASE;
         tempItem.querySelector('.img-cont img.poster').setAttribute('src', currentImgBase + itemObj.poster_path);
         tempItem.querySelectorAll('.link').forEach(function (itemLink, i) {
-          itemLink.setAttribute('href', '/details.html');
+          itemLink.setAttribute('href', '/details.html?id=' + itemObj.id);
         });
         resultsCont.appendChild(tempItem);
       });
@@ -134,10 +142,11 @@ var movieSearch = window.movieSearch || {
     searchBtn.addEventListener('click', searchBtnHandler);
   };
 
-  document.querySelector('.search-results .item.template').remove();
+  document.querySelector('.search-results .item.template').remove(); // interface
 
   __ms.init = function () {
     registerHandlers();
-  }; // -------------------------------- END --------------------------------------
+  };
 
+  __ms.getMovieById = getMovieByIdRequest; // -------------------------------- END --------------------------------------
 })(movieSearch);
