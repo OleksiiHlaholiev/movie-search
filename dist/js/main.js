@@ -1,5 +1,1 @@
-'use strict';
-
-window.addEventListener('load', function (ev) {
-  movieSearch.init();
-});
+"use strict";window.addEventListener("load",function(i){movieSearch.init()});

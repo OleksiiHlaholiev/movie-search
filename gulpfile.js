@@ -67,7 +67,7 @@ gulp.task('js', function() {
     return gulp.src(path.src.js)
         .pipe(plumber()) // error Handler
         .pipe(babel())
-        // .pipe(uglify())
+        .pipe(uglify())
         .pipe(gulp.dest(path.dist.js))
 });
 
