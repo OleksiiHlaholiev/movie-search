@@ -2,9 +2,26 @@
 @import 'constants';
 
 .movie-details-section {
+    padding: 0;
+    margin: 30px 0;
+    color: white;
+
+    filter: opacity(0) grayscale(100%) contrast(130%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    will-change: opacity;
+    transition: filter 1s;
+
+    &.loaded {
+        filter: opacity(100) grayscale(20%) contrast(130%);
+    }
+
     .search-results {
         .results-cont {
             .item {
+                border: none;
+                box-shadow: none;
                 .img-cont {
                     width: 300px;
                     @include mediaMaxWidth($mobileWidth) {
@@ -21,10 +38,16 @@
 
                     .name {
                         font-size: 2.4rem;
+                        color: white;
                     }
 
                 }
             }
         }
+    }
+
+    .bg-cont {
+        padding: 20px 0;
+        background-image: radial-gradient(circle at 20% 50%, rgba(0.00%, 27.84%, 67.06%, 0.98) 0%, rgba(0.00%, 27.84%, 67.06%, 0.88) 100%);
     }
 }

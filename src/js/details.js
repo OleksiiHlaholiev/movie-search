@@ -6,7 +6,8 @@ const detailInfo = window.detailInfo || {
 
 
 ((__di) => {
-    const itemTemplate = document.querySelector('.search-results .item.template'),
+    const movieDetailsSection = document.querySelector('.movie-details-section'),
+        itemTemplate = document.querySelector('.search-results .item.template'),
         resultsCont = document.querySelector('.search-results .results-cont'),
         resultsTitle = document.querySelector('.search-results .results-title'),
         videoId = window.location.search.split("id=")[1],
@@ -14,7 +15,8 @@ const detailInfo = window.detailInfo || {
         MOBILE_WIDTH = 500,
         IMG_W185_H278_PATH_BASE = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2/',
         IMG_W350_H196_PATH_BASE = 'https://image.tmdb.org/t/p/w350_and_h196_bestv2/',
-        IMG_W300_H450_PATH_BASE = 'https://image.tmdb.org/t/p/w300_and_h450_bestv2/';
+        IMG_W300_H450_PATH_BASE = 'https://image.tmdb.org/t/p/w300_and_h450_bestv2/',
+        IMG_W1400_H450_PATH_BASE = 'https://image.tmdb.org/t/p/w1400_and_h450_face/';
 
     // -------------------------------- START --------------------------------------
 
@@ -29,6 +31,7 @@ const detailInfo = window.detailInfo || {
             tempItem = itemTemplate.cloneNode(true);
             tempItem.classList.remove('template');
 
+            movieDetailsSection.style.backgroundImage = IMG_W1400_H450_PATH_BASE + itemObj.backdrop_path;
             tempItem.setAttribute('data-video-id', itemObj.id);
             tempItem.querySelector('.name').innerText = itemObj.title;
 
@@ -42,7 +45,7 @@ const detailInfo = window.detailInfo || {
             tempItem.querySelector('.description').innerText = itemObj.overview;
 
             window.innerWidth > MOBILE_WIDTH ?
-                currentImgBase = IMG_W300_H450_PATH_BASE:
+                currentImgBase = IMG_W300_H450_PATH_BASE :
                 currentImgBase = IMG_W350_H196_PATH_BASE;
 
             tempItem.querySelector('.img-cont img.poster').setAttribute('src', currentImgBase + itemObj.poster_path);
@@ -61,15 +64,14 @@ const detailInfo = window.detailInfo || {
     }
 
     __di.init = () => {
-        // registerHandlers();
+        movieDetailsSection.classList.add('loaded');
     };
-
 
     movieSearch.getMovieById(videoId, updateContent);
 
     // -------------------------------- END --------------------------------------
 })(detailInfo);
 
-window.addEventListener('load', function() {
-    // debugger;
+window.addEventListener('load', function () {
+    detailInfo.init();
 });
